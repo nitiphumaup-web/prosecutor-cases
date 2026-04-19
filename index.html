@@ -348,6 +348,7 @@
     document.getElementById('modalTitle').textContent='เพิ่มคดีใหม่';
     document.getElementById('modalOverlay').classList.add('open');
   }
+
   function editCase(id) {
     const c = cases.find(x=>x.id===id); if (!c) return;
     document.getElementById('editId').value=c.id;
@@ -361,8 +362,11 @@
     document.getElementById('modalTitle').textContent='แก้ไขคดี';
     document.getElementById('modalOverlay').classList.add('open');
   }
+
   function closeModal() { document.getElementById('modalOverlay').classList.remove('open'); }
-  document.getElementById('caseTableBody').addEventListener('click', function(e) {
+
+  /* ✅ แก้ไขจุดนี้ — delegate ไปที่ document แทน caseTableBody */
+  document.addEventListener('click', function(e) {
     const editBtn = e.target.closest('.btn-edit');
     const deleteBtn = e.target.closest('.btn-delete');
     if (editBtn) editCase(editBtn.dataset.id);
